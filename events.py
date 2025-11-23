@@ -1,7 +1,7 @@
 import discord
 
 from bot import bot, logger
-from utils import get_random_hello_replies
+from utils import get_random_hello_replies, get_random_welcome_replies
 
 
 @bot.event
@@ -13,7 +13,7 @@ async def on_ready():
 async def on_member_join(member: discord.Member):
     logger.info(f"{member} has joined a server.")
     guild = member.guild
-    await guild.system_channel.send(f"Welcome {member.mention}!")
+    await guild.system_channel.send(get_random_welcome_replies(member))
 
 
 @bot.event
