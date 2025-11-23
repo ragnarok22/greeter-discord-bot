@@ -41,6 +41,14 @@ DISCORD_API=your-bot-token-here
 python main.py
 ```
 
+Docker Compose
+--------------
+You can run the bot in a container with the included `compose.yaml`:
+1) Create a `.env` with `DISCORD_API=your-bot-token-here`.
+2) Build and start: `docker compose up --build -d`
+3) View logs: `docker compose logs -f discord-bot`
+4) Stop and remove: `docker compose down`
+
 Usage
 -----
 - Send `hello` in a channel the bot can read to get a quick reply.
