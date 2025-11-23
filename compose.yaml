@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  discord-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gretter-discord-bot
+
+    # Load environment variables from .env file
+    env_file:
+      - .env
+
+    # Auto-restart policy: restart unless explicitly stopped
+    restart: unless-stopped
+
+    # Health check configuration (inherited from Dockerfile but can be overridden)
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "python main.py"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+
+    # Logging configuration (optional: limits log size)
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
