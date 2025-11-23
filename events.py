@@ -1,6 +1,7 @@
 import discord
 
 from bot import bot, logger
+from utils import get_random_hello_replies
 
 
 @bot.event
@@ -29,7 +30,11 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if message.content.startswith("hello"):
-        await message.channel.send("Hello!")
+    if message.content.lower().startswith("hello"):
+        await message.channel.send(get_random_hello_replies())
+
+    if bot.user.mentioned_in(message):
+        await message.add_reaction("👍🏼")
+        await message.channel.send(get_random_hello_replies())
 
     await bot.process_commands(message)
